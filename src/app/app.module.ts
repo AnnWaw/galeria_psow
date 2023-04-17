@@ -9,6 +9,7 @@ import { RandomImagePageComponent } from './pages/random-image-page/random-image
 import { GalleryPageComponent } from './pages/gallery-page/gallery-page.component';
 import { FormsModule } from '@angular/forms';
 import { BreedsFilterPipe } from './pipes/breeds-filter.pipe';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import { BreedsFilterPipe } from './pipes/breeds-filter.pipe';
     FormsModule,
     NgbPaginationModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
