@@ -1,0 +1,117 @@
+<div class="gallery-container">
+  <p class="text-center kolor-tekstu">
+    Rasa: <strong>{{ breedName | uppercase }}</strong>
+    <span *ngIf="subBreed"
+      ><br />Podrasa: <strong>{{ subBreed | lowercase }}</strong></span
+    >
+  </p>
+  <div class="d-flex">
+    <ngb-pagination
+      [collectionSize]="dogImageUrl.length"
+      [(page)]="currentPage"
+      [pageSize]="itemsPerPage"
+      [maxSize]="maxSize"
+      [boundaryLinks]="false"
+      [directionLinks]="true"
+      [rotate]="false"
+      (pageChange)="changePage($event)"
+      class="pagination-custom"
+    >
+    </ngb-pagination>
+  </div>
+  <p class="total-images text-center font-italic kolor-tekstu">
+    Wyświetlane zdjęcia od {{ (currentPage - 1) * itemsPerPage + 1 }} do
+    {{ Math.min(currentPage * itemsPerPage, dogImageUrl.length) }} z
+    {{ dogImageUrl.length }}
+  </p>
+
+  <div *ngIf="!isLoading">
+    <div *ngIf="dogImageUrl" class="container">
+      <div class="row">
+        <ng-container
+          *ngFor="
+            let imageUrl of dogImageUrl.slice(
+              (currentPage - 1) * itemsPerPage,
+              currentPage * itemsPerPage
+            );
+            index as i
+          "
+        >
+          <div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2 mb-3">
+            <img
+              [src]="imageUrl"
+              alt="Dog image"
+              class="dog-image img-fluid"
+              (click)="openModal(imageUrl)"
+            />
+          </div>
+          <ng-container *ngIf="(i + 1) % 1 === 0 && isExtraSmallScreen">
+            <div class="w-100"></div>
+          </ng-container>
+          <ng-container *ngIf="(i + 1) % 1 === 0 && isSmallScreen">
+            <div class="w-100"></div>
+          </ng-container>
+          <ng-container *ngIf="(i + 1) % 3 === 0 && isMediumScreen">
+            <div class="w-100"></div>
+          </ng-container>
+          <ng-container *ngIf="(i + 1) % 5 === 0 && isLargeScreen">
+            <div class="w-100"></div>
+          </ng-container>
+          <ng-container *ngIf="(i + 1) % 5 === 0 && isExtraLargeScreen">
+            <div class="w-100"></div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    #imageModal
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="imageModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="imageModalLabel">Podgląd zdjęcia</h5>
+          <button
+            type="button"
+            class="close"
+            aria-label="Zamknij"
+            (click)="closeModal()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div
+          class="modal-body d-flex align-items-center justify-content-center"
+        >
+          <img
+            [src]="selectedImageUrl"
+            alt="Full size dog image"
+            class="img-fluid"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="closeModal()"
+          >
+            Zamknij
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="isLoading"
+  class="spinner-container d-flex align-items-center justify-content-center"
+>
+  <div class="spinner-border text-primary" role="status"></div>
+  <span class="ms-2" class="kolor-tekstu">Ładowanie zdjęć</span>
+</div>

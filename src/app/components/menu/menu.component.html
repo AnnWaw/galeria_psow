@@ -1,0 +1,42 @@
+<div class="menu-container" style="height: 100vh; overflow-y: auto">
+  <h2><a routerLink="" class="text-decoration-none">RASY PSÓW</a></h2>
+  <input [(ngModel)]="filter" name="filter" placeholder="szukaj" class="szukaj"/>
+  <p></p>
+  <p class="kolor-tekstu">Rasy alfabetycznie:</p>
+  <ul>
+    <ng-container
+      *ngFor="let breed of breeds | breedsFilter : filter; let i = index"
+    >
+      <li>
+        <button
+          type="button"
+          class="btn btn-link text-decoration-none"
+          (click)="isCollapsed[i] = !isCollapsed[i]"
+          [routerLink]="['/gallery', breed.breedName]"
+        >
+          {{ breed.breedName | uppercase }}
+          <span *ngIf="breed.subBreeds.length > 0" class="badge bg-primary ms-2"
+            >+</span
+          >
+        </button>
+        <div
+          [style.display]="!isCollapsed[i] ? 'none' : 'block'"
+          *ngIf="breed.subBreeds.length > 0"
+        >
+          <ul>
+            <li *ngFor="let subBreed of breed.subBreeds" class="subBred">
+              <button
+                type="button"
+                class="btn btn-link text-decoration-none"
+                [routerLink]="['/gallery', breed.breedName, subBreed]"
+              >
+                {{ subBreed | lowercase }}
+              </button>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+  <p *ngIf="(breeds | breedsFilter : filter).length === 0">Rasa nie istnieje</p>
+</div>
