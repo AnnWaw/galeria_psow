@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Breed } from 'src/app/models/breed';
 import { DogApiService } from 'src/app/services/dog-api.service';
 
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -23,5 +22,9 @@ export class MenuComponent implements OnInit{
       this.dogApi.getBreeds().subscribe((breeds: Breed[]) => {
         this.breeds = breeds;        
       });
+  }
+
+  checkCollapse(index: number):void {
+    this.isCollapsed[index] = !this.isCollapsed[index];
   }
 }

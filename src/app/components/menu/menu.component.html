@@ -1,6 +1,11 @@
 <div class="menu-container" style="height: 100vh; overflow-y: auto">
   <h2><a routerLink="" class="text-decoration-none">RASY PSÓW</a></h2>
-  <input [(ngModel)]="filter" name="filter" placeholder="szukaj" class="szukaj"/>
+  <input
+    [(ngModel)]="filter"
+    name="filter"
+    placeholder="szukaj"
+    class="szukaj"
+  />
   <p></p>
   <p class="kolor-tekstu">Rasy alfabetycznie:</p>
   <ul>
@@ -8,16 +13,19 @@
       *ngFor="let breed of breeds | breedsFilter : filter; let i = index"
     >
       <li>
-        <button
-          type="button"
+        <span
           class="btn btn-link text-decoration-none"
-          (click)="isCollapsed[i] = !isCollapsed[i]"
           [routerLink]="['/gallery', breed.breedName]"
         >
           {{ breed.breedName | uppercase }}
-          <span *ngIf="breed.subBreeds.length > 0" class="badge bg-primary ms-2"
-            >+</span
-          >
+        </span>
+        <button
+          *ngIf="breed.subBreeds.length > 0"
+          type="button"
+          class="badge bg-primary ms-1 border-0 text-decoration-none"
+          (click)="checkCollapse(i)"
+        >
+          +
         </button>
         <div
           [style.display]="!isCollapsed[i] ? 'none' : 'block'"
@@ -25,13 +33,12 @@
         >
           <ul>
             <li *ngFor="let subBreed of breed.subBreeds" class="subBred">
-              <button
-                type="button"
-                class="btn btn-link text-decoration-none"
+              <span
+                class="btn btn-link text-decoration-none p-0"
                 [routerLink]="['/gallery', breed.breedName, subBreed]"
               >
                 {{ subBreed | lowercase }}
-              </button>
+              </span>
             </li>
           </ul>
         </div>

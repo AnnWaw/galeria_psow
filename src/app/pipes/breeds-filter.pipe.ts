@@ -23,7 +23,6 @@ export class BreedsFilterPipe implements PipeTransform {
         }
       }
     });
-
     return breeds;
   }
 }

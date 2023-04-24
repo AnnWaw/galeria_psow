@@ -1,5 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DogApiService } from 'src/app/services/dog-api.service';
+import { ModalImageComponent } from '../modal-image/modal-image.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-random-image',
@@ -9,10 +11,12 @@ import { DogApiService } from 'src/app/services/dog-api.service';
 export class RandomImagePageComponent implements OnInit {
   
   dogImageUrl:string = '';
-  @ViewChild('imageModal', { static: false }) imageModal!: ElementRef;
+  selectedImageUrl!: string;
+  @ViewChild('content', { static: true }) content!: TemplateRef<any>;
+  // @ViewChild('imageModal', { static: false }) imageModal!: ElementRef;
   // @ViewChild('modalBackdrop', { static: false }) modalBackdrop!: ElementRef;
   
-  constructor(private dogApi: DogApiService) {}
+  constructor(private dogApi: DogApiService, private modalService: NgbModal) {}
   
   getDogImage(){
     this.dogApi.getRandomImage().subscribe((imageUrl: string) => {
@@ -20,21 +24,14 @@ export class RandomImagePageComponent implements OnInit {
     });
   }
   
-  
   ngOnInit(): void {
     this.getDogImage()
   }
 
-  openModal(dogImageUrl: string): void {
-    this.dogImageUrl = dogImageUrl;
-    this.imageModal.nativeElement.classList.add('show');
-    this.imageModal.nativeElement.style.display = 'block';
-    document.body.classList.add('modal-open');
-  }
-
-  closeModal(): void {
-    this.imageModal.nativeElement.classList.remove('show');
-    this.imageModal.nativeElement.style.display = 'none';
-    document.body.classList.remove('modal-open');
+  openModal(dogImageUrl: string) {
+    this.selectedImageUrl = dogImageUrl;
+    const modalRef = this.modalService.open(ModalImageComponent, { backdrop: 'static' });
+    modalRef.componentInstance.dogImageUrl = dogImageUrl;
+    modalRef.componentInstance.activeModal = modalRef;
   }
 }

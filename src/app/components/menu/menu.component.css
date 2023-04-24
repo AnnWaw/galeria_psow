@@ -1,20 +1,21 @@
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 0.1rem;
 }
 
 .menu-container {
-  padding-left: 1.45rem;
+  padding-left: 0;
   padding-top: 2rem;
 }
 
 .subBred {
-  padding-left: 1rem;
+  padding-left: 1.5rem;
 }
 
 .szukaj{
     margin-top: 0.5rem;
-    border-color: #007bff;
+    border-color: var(--primary-color);
+    width: 9rem;
 }
 
 .menu-container::-webkit-scrollbar {
@@ -22,15 +23,15 @@ ul {
 }
 
 .menu-container::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Kolor tła ścieżki paska przewijania */
+  background-color: var(--path-background-color); /* Kolor tła ścieżki paska przewijania */
   border-radius: 10px; /* Zaokrąglenie krawędzi ścieżki paska przewijania */
 }
 
 .menu-container::-webkit-scrollbar-thumb {
-  background-color: #007bff; /* Kolor paska przewijania */
+  background-color: var(--primary-color);  /* Kolor paska przewijania */
   border-radius: 10px; /* Zaokrąglenie krawędzi paska przewijania */
 }
 
 .menu-container::-webkit-scrollbar-thumb:hover {
-  background-color: #0056b3; /* Kolor paska przewijania podczas najechania */
+  background-color: var(--dark-color); /* Kolor paska przewijania podczas najechania */
 }
