@@ -11,3 +11,8 @@
 .kolor-tekstu{
     color: #0056b3;
 }
+
+.container-fluid{
+  max-width: 1600px;
+  text-align: center;
+}
