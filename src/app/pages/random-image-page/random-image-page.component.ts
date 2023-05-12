@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { DogApiService } from 'src/app/services/dog-api.service';
+import { DogApiService } from '../../services/dog-api.service';
 import { ModalImageComponent } from '../modal-image/modal-image.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
