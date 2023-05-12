@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/c
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DogApiService } from 'src/app/services/dog-api.service';
+import { DogApiService } from '../../services/dog-api.service';
 import { ModalImageComponent } from '../modal-image/modal-image.component';
 
 @Component({
