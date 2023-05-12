@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Breed } from 'src/app/models/breed';
-import { DogApiService } from 'src/app/services/dog-api.service';
+import { Breed } from '../../models/breed';
+import { DogApiService } from '../../services/dog-api.service';
 
 @Component({
   selector: 'app-menu',
